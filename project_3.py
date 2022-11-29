@@ -1,7 +1,5 @@
-import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
-import mpld3
 
 '''
 Step One importing Data and Filtering through Data and Creating the figure
@@ -118,4 +116,3 @@ plt.minorticks_on()
 plt.legend(loc = 'lower right', shadow = True)
 plt.tick_params(axis = 'both', labelsize = 8)
 
-st.pyplot(fig)
