@@ -1,7 +1,6 @@
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
-import mpld3
 
 '''
 Step One importing Data and Filtering through Data and Creating the figure
