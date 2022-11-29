@@ -27,19 +27,6 @@ fig = make_subplots(
     subplot_titles=("First Subplot","Second Subplot", "Third Subplot"))
 
 '''
-fig.add_trace(go.Scatter(
-    x=pd.date_range("2019-10-03", "2022-11-03", freq='M'),
-    y=avg_temp,
-    #row=1,
-    #col=1,
-    mode='markers',
-    marker=dict(
-    color=colour_temp,
-    color_continuous_scale=px.colors.sequential.Viridis,
-    size=avg_precip,
-    showscale=True
-    )
-))
 '''
 
 option = st.multiselect(
@@ -50,11 +37,19 @@ option = st.multiselect(
 
 if 'Precipitation' in option:
     fig.add_trace(go.Scatter(
-        x=pd.date_range("2019-10-03", "2022-11-03", freq='M'),
-        y=avg_precip),
-        row=1,
-        col=1
+    x=pd.date_range("2019-10-03", "2022-11-03", freq='M'),
+    y=avg_temp,
+    mode='markers',
+    marker=dict(
+    color=colour_temp,
+    color_continuous_scale=px.colors.sequential.Viridis,
+    size=avg_precip,
+    showscale=True
+    )),
+    row=1,
+    col=1
     )
+    
 
 if 'Average Temp' in option:   
     fig.add_trace(go.Scatter(
