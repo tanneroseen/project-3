@@ -116,4 +116,3 @@ plt.minorticks_on()
 plt.legend(loc = 'lower right', shadow = True)
 plt.tick_params(axis = 'both', labelsize = 8)
 
-st.pyplot(fig)
