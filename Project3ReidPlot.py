@@ -62,6 +62,7 @@ fig = go.Figure()
 fig.add_trace(go.Scatter(
 x=min_xvals,
 y=min_yvals,
+mode="lines+markers"
 #color = 'royalblue',
 ))
 fig.add_trace(go.Scatter(
