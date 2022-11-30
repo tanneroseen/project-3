@@ -1,9 +1,15 @@
 import plotly.graph_objects as go
-import plotly.express as px
-from plotly.subplots import make_subplots
 import pandas as pd
-import numpy as np
 import streamlit as st
+from datetime import datetime as dt
+from datetime import date
+
+st.set_page_config(
+    page_title = 'Project 3',
+    page_icon = ':shark:',
+    layout = 'centered'
+)
+
 
 jasper_data = pd.read_csv('Jasper_Daily_Weather_Data.csv', encoding= 'unicode_escape')  #Importing the daily data
 jasper_data['Date (Local Standard Time)'] = pd.to_datetime(jasper_data['Date (Local Standard Time)']) #Converting tbe 'Date (Local Standard Time)' row to Date time data type for easy use to bundle by week, month etc
@@ -18,17 +24,33 @@ avg_precip = jasper_data.groupby(pd.Grouper(key= 'Date (Local Standard Time)', f
 avg_temp = jasper_data.groupby(pd.Grouper(key= 'Date (Local Standard Time)', freq='M'))['Air Temp. Avg. (C)'].mean() #Does the avg monthly air temp from the daily averages
 min_temp = min_grouped_by_week = jasper_data.groupby(pd.Grouper(key = 'Date (Local Standard Time)', freq = 'M'))['Air Temp. Min. (C)'].min()
 
-colour_temp = avg_temp*10
+fancy_page_stuff = """
+<style>
+[data-testid="stAppViewContainer"] {
+    background-color: #d692fc
+}
 
-col1, col2 = st.columns(2)
+[data-testid="stHeader"] {
+    background-color: #d692fc
+}
 
-#fig = make_subplots(
-#    rows=2, cols=2,
-#    specs=[[{}, {}],
-#           [{"colspan": 2}, None]],
-#    subplot_titles=("First Subplot","Second Subplot", "Third Subplot"))
+[data-testid="stVerticalBlock"] {
+    background-color: #d692fc
+}
+</style>
+"""
 
-fig = go.Figure()
+st.markdown(fancy_page_stuff, unsafe_allow_html=True)
+
+current_time = start_time = dt.strftime(dt.now(),'%X') 
+current_date = date.today().strftime("%B %d, %Y")
+
+st.write(
+    'The current date and time is: ',
+    current_date,
+    ' at ',
+    current_time
+)
 
 option = st.multiselect(
     'What graphs would you like to display?',
@@ -36,38 +58,57 @@ option = st.multiselect(
     []
 )
 
-with col1:
-    if 'Precipitation' in option:
-        fig.add_trace(go.Scatter(
-            x = pd.date_range("2019-10-03", "2022-11-03", freq='M'),
-            y = avg_temp,
-            mode='markers',
-            marker=dict(
-                color=avg_temp,
-                colorscale="Viridis",
-                size=avg_precip,
-                colorbar = dict(
-                    title="Type"
-                ),
-            ),
-            showlegend=True
-        ))
-    
-with col2:
-    if 'Average Temp' in option:   
-        fig.add_trace(go.Scatter(
-            x=pd.date_range("2019-10-03", "2022-11-03", freq='M'),
-            y=avg_temp),
-            #row=1,
-            #col=2
-        )
+fig1 = go.Figure()
+fig2 = go.Figure()
+fig3 = go.Figure()
 
-if 'Min Temp' in option:
-    fig.add_trace(go.Scatter(
-        x=pd.date_range("2019-10-03", "2022-11-03", freq='M'),
-        y=min_temp),
-        #row=2,
-        #col=1
+if 'Precipitation' in option:
+    st.info('Precipitation shown below')
+
+    fig1.add_trace(go.Scatter(
+        x = pd.date_range("2019-10-03", "2022-11-03", freq='M'),
+        y = avg_temp,
+        mode='markers',
+        marker=dict(
+            color=avg_temp,
+            colorscale="Viridis",
+            size=avg_precip,
+            colorbar = dict(
+                title="Temperature",
+                tickvals = [-10,0,15],
+                ticktext = ['Snow', 'Sleet', 'Rain']
+            ),
+        ),
+    ))
+
+    fig1.update_layout(
+        title = "Precipitation",
+        xaxis_title = 'Date',
+        yaxis_title = 'Temperature',
+        paper_bgcolor = '#d692fc'
     )
 
-st.plotly_chart(fig)
+
+    st.plotly_chart(fig1)
+
+    with st.expander("Explanation"):
+        st.write(
+            'The above chart displays date vs temperature throughout each month from October 2019 to September 2022.',
+            'The size of each bubble represents the ammount of precipitation in the month and the colour corresponds to the type of precipitation whether that is rain or snow.'
+        )
+
+if 'Average Temp' in option:   
+    fig2.add_trace(go.Scatter(
+        x=pd.date_range("2019-10-03", "2022-11-03", freq='M'),
+        y=avg_temp),
+    )
+
+    st.plotly_chart(fig2)
+
+if 'Min Temp' in option:
+    fig3.add_trace(go.Scatter(
+        x=pd.date_range("2019-10-03", "2022-11-03", freq='M'),
+        y=min_temp),
+    )
+
+    st.plotly_chart(fig3)

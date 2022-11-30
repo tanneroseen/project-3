@@ -6,3 +6,7 @@ We need all 3 graphs made with plotly and there's some simple examples in the te
 Reid's should be pretty easy.
 Gavin's I haven't looked at yet but might be tricky to get exact.
 I've figured mine out for everything except colour bar.
+
+
+This is the Jasper Data Link Jasper Ward is the station
+https://acis.alberta.ca/weather-data-viewer.jsp
