@@ -56,60 +56,29 @@ plt.legend(loc = 'lower right', shadow = True)
 plt.tick_params(axis = 'both', labelsize = 8)
 '''
 #plt end **
-
-fig = make_subplots(
-    rows=2, cols=2,
-    specs=[[{}, {}],
-           [{"colspan": 2}, None]],
-    subplot_titles=("First Subplot","Second Subplot", "Weekly Temperature Extremes and their Difference"))
-'''
-option = st.multiselect(
-    'What graphs would you like to display?',
-    ['Precipitation', 'Average Temp', 'Weekly Temperature Extremes and their Difference'],
-    []
-)
-'''
-option = ['Weekly Temperature Extremes and their Difference']
-
-if 'Weekly Temperature Extremes and their Difference' in option:
-    fig.add_trace(go.line(
-    x=min_xvals,
-    y=min_yvals,
-    color = 'royalblue',
-    row=2,
-    col=1
-    ))
-    fig.add_trace(go.line(
-    x=max_xvals,
-    y=max_yvals,
-    color = 'r',
-    row=2,
-    col=1
-    ))
-    fig.add_trace(go.line(
-    x=difference_xvals,
-    y=difference_yvals,
-    color = 'limegreen',
-    row=2,
-    col=1
-    ))
-    fig.add_trace(go.line(
-    x=zero_linex,
-    y=zero_liney,
-    color = 'k',
-    row=2,
-    col=1
-    ))
-
 #plotly start **
-'''
-fig = dict({
-    "data": [{"type": "line",
-              "x": [1, 2, 3],
-              "y": [1, 3, 2]}],
-    "layout": {"title": {"text": "A Figure Specified By Python Dictionary"}}
-})
-'''
+fig = go.Figure()
 
+fig.add_trace(go.Scatter(
+x=min_xvals,
+y=min_yvals,
+#color = 'royalblue',
+))
+fig.add_trace(go.Scatter(
+x=max_xvals,
+y=max_yvals,
+#color = 'r',
+))
+fig.add_trace(go.Scatter(
+x=difference_xvals,
+y=difference_yvals,
+#color = 'limegreen',
+))
+fig.add_trace(go.Scatter(
+x=zero_linex,
+y=zero_liney,
+#color = 'k',
+))
 #pio.show(fig)
-#plotly end **
+fig.show()
+#pl0tly end **
