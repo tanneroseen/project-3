@@ -38,8 +38,6 @@ zero_liney = [0 for x in range(len(min_xvals))]
 
 
 #Plots the data with time
-xlabel = ['Date']
-ylabel = ['Temperature (\u00B0C)']
 '''
 min_grouped_by_week.plot(color = 'royalblue', label = 'Minimum', alpha = 0.4)
 max_grouped_by_week.plot(color = 'r', label = 'Maximum', alpha = 0.4)
@@ -60,8 +58,16 @@ plt.tick_params(axis = 'both', labelsize = 8)
 fig3 = go.Figure()
 
 fig3.add_trace(go.Scatter(
+    x=zero_linex,
+    y=zero_liney,
+    ))
+fig3.update_traces(line_color='k')
+
+
+fig3.add_trace(go.Scatter(
     x=min_xvals,
     y=min_yvals,
+    name='Minimum',
     mode="lines+markers",
     marker=dict(
         color='royalblue'
@@ -69,23 +75,29 @@ fig3.add_trace(go.Scatter(
     ))
 
 fig3.add_trace(go.Scatter(
-x=max_xvals,
-y=max_yvals,
-mode="lines+markers"
-#color = 'r',
-))
+    x=max_xvals,
+    y=max_yvals,
+    name='Maximum',
+    mode="lines+markers",
+    marker=dict(
+        color='r'
+        ),
+    ))
 fig3.add_trace(go.Scatter(
-x=difference_xvals,
-y=difference_yvals,
-mode="lines+markers"
-#color = 'limegreen',
-))
-fig3.add_trace(go.Scatter(
-x=zero_linex,
-y=zero_liney,
-mode="lines+markers"
-#color = 'k',
-))
+    x=difference_xvals,
+    y=difference_yvals,
+    name='Difference',
+    mode="lines+markers",
+        marker=dict(
+        color='limegreen'
+        ),
+    ))
+fig3.update_layout(
+        title = 'Weekly Temperature Extremes and their Difference',
+        xaxis_title = 'Date',
+        yaxis_title = 'Temperature (\u00B0C)',
+        paper_bgcolor = '#d692fc'
+    )
 #pio.show(fig)
 fig3.show()
 #pl0tly end **
