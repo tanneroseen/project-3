@@ -46,8 +46,10 @@ ax1.set_rlabel_position(25) #sets the magnitude label postion at 25 degrees
 cbar = fig.colorbar(c) #adds the colour bar to the plot
 cbar.set_label('Wind Speed Range (km/h)', family = 'Times New Roman') #labels the colorbar
 
+#Creates an extra column to populate in the following loop
 monthly_average_windspeed_direction['Compass Direction'] = None
 
+#Between degree values, the values are assigned a direction based on a compass and they are showed in the figure when you hover your mouse over plotted values.
 for count, direction in enumerate(monthly_average_windspeed_direction['Wind Dir. 10 m Avg. ']):
     if 112.5 < direction < 157.5:
         monthly_average_windspeed_direction['Compass Direction'][count] = 'S-E'
