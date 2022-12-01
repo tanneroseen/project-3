@@ -55,8 +55,7 @@ plt.minorticks_on()
 plt.legend(loc = 'lower right', shadow = True)
 plt.tick_params(axis = 'both', labelsize = 8)
 '''
-#plt end **
-#plotly start **
+
 fig3 = go.Figure()
 
 fig3.add_trace(go.Scatter(
@@ -72,20 +71,11 @@ fig3.add_trace(go.Scatter(
 x=max_xvals,
 y=max_yvals,
 mode="lines+markers"
-#color = 'r',
 ))
 fig3.add_trace(go.Scatter(
 x=difference_xvals,
 y=difference_yvals,
 mode="lines+markers"
-#color = 'limegreen',
 ))
-fig3.add_trace(go.Scatter(
-x=zero_linex,
-y=zero_liney,
-mode="lines+markers"
-#color = 'k',
-))
-#pio.show(fig)
+
 fig3.show()
-#pl0tly end **
