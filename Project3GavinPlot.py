@@ -15,7 +15,7 @@ jasper_data = jasper_data[jasper_data['Air Temp. Avg. Record Completeness (%)'] 
 jasper_data = jasper_data[jasper_data['Wind Speed 10 m Avg. Record Completeness (%)'] == 100]
 jasper_data = jasper_data[jasper_data['Wind Dir. 10 m Avg. Record Completeness (%)'] == 100]
 
-monthly_average_windspeed = jasper_data.groupby(pd.Grouper(key='Date (Local Standard Time)',freq='MS'))['Wind Speed 10 m Avg. (km/h)'].mean().reset_index()   #Groups wind speed data by the respective month and takes the average of it
+monthly_average_windspeed = jasper_data.groupby(pd.Grouper(key='Date (Local Standard Time)',freq='MS'))['Wind Speed 10 m Avg. (km/h)'].mean().reset_index()  #Groups wind speed data by the respective month and takes the average of it
 monthly_average_windspeed_direction = jasper_data.groupby(pd.Grouper(key='Date (Local Standard Time)',freq='MS'))['Wind Dir. 10 m Avg. '].mean().reset_index() #groups wind direction average in each month and takes the average of all days avg direction
 
 fig = plt.figure(figsize = [15,10]) #Creates the figure for everything to be graphed on
@@ -46,6 +46,29 @@ ax1.set_rlabel_position(25) #sets the magnitude label postion at 25 degrees
 cbar = fig.colorbar(c) #adds the colour bar to the plot
 cbar.set_label('Wind Speed Range (km/h)', family = 'Times New Roman') #labels the colorbar
 
+#Creates an extra column to populate in the following loop
+monthly_average_windspeed_direction['Compass Direction'] = None
+
+#Between degree values, the values are assigned a direction based on a compass and they are showed in the figure when you hover your mouse over plotted values.
+for count, direction in enumerate(monthly_average_windspeed_direction['Wind Dir. 10 m Avg. ']):
+    if 112.5 < direction < 157.5:
+        monthly_average_windspeed_direction['Compass Direction'][count] = 'S-E'
+    elif 157.5 < direction < 202.5:
+        monthly_average_windspeed_direction['Compass Direction'][count] = 'South'
+    if 202.5 < direction < 247.5:
+        monthly_average_windspeed_direction['Compass Direction'][count] = 'S-w'
+    elif 247.5 < direction < 292.5:
+        monthly_average_windspeed_direction['Compass Direction'][count] = 'West'
+    if 292.5 < direction < 337.5:
+        monthly_average_windspeed_direction['Compass Direction'][count] = 'N-W'
+    elif (337.5 < direction < 360) or (0 < direction < 22.5):
+        monthly_average_windspeed_direction['Compass Direction'][count] = 'North'
+    elif (22.5 < direction < 67.5) or (0 < direction < 22.5):
+        monthly_average_windspeed_direction['Compass Direction'][count] = 'N-E'
+
+
+print(monthly_average_windspeed_direction)
+
 fig = go.Figure()
 
 fig.add_trace(go.Scatterpolar(
@@ -56,18 +79,15 @@ fig.add_trace(go.Scatterpolar(
 ))
 
 
-fig.update_traces(text=['North', 'N-E', 'East', 'S-E', 'South', 'S-W', 'West', 'N-W'])
+fig.update_traces(text=monthly_average_windspeed_direction['Compass Direction'])
 fig.update_layout(
-    title='Wind Speed Distribution in Laurel, NE',
+    title='Daily Weather Data Recorded in Jasper National Park',
     font_size=16,
     legend_font_size=16,
     polar_radialaxis_ticksuffix='',
     polar_angularaxis_rotation=90,
     polar_angularaxis_direction = 'clockwise',
-    tick_prefix = ['North', 'N-E', 'East', 'S-E', 'South', 'S-W', 'West', 'N-W'],
 
 
 )
 fig.show()
-
-
