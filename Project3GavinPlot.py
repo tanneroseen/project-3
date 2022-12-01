@@ -51,7 +51,6 @@ fig = go.Figure()
 fig.add_trace(go.Scatterpolar(
     r = r,
     theta = theta,
-    name='11-14 m/s',
     mode = 'markers',
     marker_color='rgb(106,81,163)'
 ))
@@ -62,8 +61,11 @@ fig.update_layout(
     title='Wind Speed Distribution in Laurel, NE',
     font_size=16,
     legend_font_size=16,
-    polar_radialaxis_ticksuffix='%',
+    polar_radialaxis_ticksuffix='',
     polar_angularaxis_rotation=90,
+    polar_angularaxis_direction = 'clockwise',
+    tick_prefix = ['North', 'N-E', 'East', 'S-E', 'South', 'S-W', 'West', 'N-W'],
+
 
 )
 fig.show()
