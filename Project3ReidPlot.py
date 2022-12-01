@@ -19,13 +19,9 @@ min_grouped_by_week = jasper_data.groupby(pd.Grouper(key = 'Date (Local Standard
 max_grouped_by_week = jasper_data.groupby(pd.Grouper(key = 'Date (Local Standard Time)', freq = 'W-SUN'))['Air Temp. Max. (C)'].max()
 differce_in_max_and_min = max_grouped_by_week - min_grouped_by_week
 
-
-#Anything below this is Plotly not matplotlib.pylot
-
 date_range = min_grouped_by_week.keys() #grabs each date (start of each week grouped by) that is used by all graphs as common x-values
 
 fig3 = go.Figure()
-
 fig3.add_trace(go.Scatter(
     x = date_range,
     y = [0 for i in range(len(date_range))],
@@ -33,9 +29,6 @@ fig3.add_trace(go.Scatter(
     opacity = 0.5,
     line = dict(color = 'black')
     ))
-#fig3.update_traces(line_color = 'black')
-
-
 fig3.add_trace(go.Scatter(
     x = date_range,
     y = min_grouped_by_week,
@@ -43,7 +36,6 @@ fig3.add_trace(go.Scatter(
     mode = "lines+markers",
     line = dict(color = '#0000FF')
     ))
-
 fig3.add_trace(go.Scatter(
     x = date_range,
     y = max_grouped_by_week,
@@ -64,5 +56,4 @@ fig3.update_layout(
         yaxis_title = 'Temperature (\u00B0C)',
         paper_bgcolor = 'powderblue'
         )
-
 fig3.show()
