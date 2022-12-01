@@ -46,17 +46,26 @@ ax1.set_rlabel_position(25) #sets the magnitude label postion at 25 degrees
 cbar = fig.colorbar(c) #adds the colour bar to the plot
 cbar.set_label('Wind Speed Range (km/h)', family = 'Times New Roman') #labels the colorbar
 
-fig = go.Figure(data=
-    go.Scatterpolar(
-        r = r,
-        theta = theta,
-        thetaunit = 'degrees',
-        mode = 'markers',
-        theta0 = 'N',
-    ))
+fig = go.Figure()
 
-fig.update_layout(showlegend=False)
+fig.add_trace(go.Scatterpolar(
+    r = r,
+    theta = theta,
+    name='11-14 m/s',
+    mode = 'markers',
+    marker_color='rgb(106,81,163)'
+))
 
+
+fig.update_traces(text=['North', 'N-E', 'East', 'S-E', 'South', 'S-W', 'West', 'N-W'])
+fig.update_layout(
+    title='Wind Speed Distribution in Laurel, NE',
+    font_size=16,
+    legend_font_size=16,
+    polar_radialaxis_ticksuffix='%',
+    polar_angularaxis_rotation=90,
+
+)
 fig.show()
 
 
