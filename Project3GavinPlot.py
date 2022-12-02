@@ -76,8 +76,16 @@ fig.add_trace(go.Scatterpolar(
     r = r,
     theta = theta,
     mode = 'markers',
-    marker_color='rgb(106,81,163)'
-))
+    marker = dict(
+        size=2.5*r,
+        #cmax=10,
+        #cmin=0,
+        color=r,
+        colorbar=dict(
+            title="Wind Speed Range (km/h)"
+        ),
+        colorscale="plasma"
+)))
 
 
 fig.update_traces(
