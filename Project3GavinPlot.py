@@ -52,22 +52,23 @@ monthly_average_windspeed_direction['Compass Direction'] = None
 #Between degree values, the values are assigned a direction based on a compass and they are shown in the figure when you hover your mouse over plotted values.
 for count, direction in enumerate(monthly_average_windspeed_direction['Wind Dir. 10 m Avg. ']):
     if 112.5 < direction < 157.5:
-        monthly_average_windspeed_direction['Compass Direction'][count] = 'S-E'
+        monthly_average_windspeed_direction.iloc[count, 2] = 'S-E'
     elif 157.5 < direction < 202.5:
-        monthly_average_windspeed_direction['Compass Direction'][count] = 'South'
+        monthly_average_windspeed_direction.iloc[count, 2] = 'South'
     if 202.5 < direction < 247.5:
-        monthly_average_windspeed_direction['Compass Direction'][count] = 'S-w'
+        monthly_average_windspeed_direction.iloc[count, 2] = 'S-w'
     elif 247.5 < direction < 292.5:
-        monthly_average_windspeed_direction['Compass Direction'][count] = 'West'
+        monthly_average_windspeed_direction.iloc[count, 2] = 'West'
     if 292.5 < direction < 337.5:
-        monthly_average_windspeed_direction['Compass Direction'][count] = 'N-W'
+        monthly_average_windspeed_direction.iloc[count, 2] = 'N-W'
     elif (337.5 < direction < 360) or (0 < direction < 22.5):
-        monthly_average_windspeed_direction['Compass Direction'][count] = 'North'
+        monthly_average_windspeed_direction.iloc[count, 2] = 'North'
     elif (22.5 < direction < 67.5) or (0 < direction < 22.5):
-        monthly_average_windspeed_direction['Compass Direction'][count] = 'N-E'
+        monthly_average_windspeed_direction.iloc[count, 2] = 'N-E'
 
+#Converting the dates in the dataframe into strings so that they can be displayed in the graph easily
+monthly_average_windspeed_direction['Datetime as String'] = monthly_average_windspeed_direction['Date (Local Standard Time)'].astype(str)
 
-print(monthly_average_windspeed_direction)
 
 fig = go.Figure()
 
@@ -79,9 +80,15 @@ fig.add_trace(go.Scatterpolar(
 ))
 
 
-fig.update_traces(text=monthly_average_windspeed_direction['Compass Direction'])
+fig.update_traces(
+    text=monthly_average_windspeed_direction.iloc[:,[3,2]],
+    hovertemplate = 'Date: %{text[0]} <extra></extra>' + 
+    '<br>Windspeed: %{r:.2f} km/h' +
+    '<br>Direction: %{theta:.2f}°, %{text[1]}',
+)
+
 fig.update_layout(
-    title='Daily Weather Data Recorded in Jasper National Park',
+    title='Monthly Average Windspeed Recorded in Jasper National Park',
     font_size=16,
     legend_font_size=16,
     polar_radialaxis_ticksuffix='',
