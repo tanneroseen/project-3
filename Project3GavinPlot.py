@@ -36,7 +36,7 @@ for count, direction in enumerate(monthly_average_windspeed_direction['Wind Dir.
     elif (22.5 < direction < 67.5) or (0 < direction < 22.5):
         monthly_average_windspeed_direction.iloc[count, 2] = 'N-E'
 
-monthly_average_windspeed_direction['Date as String'] = monthly_average_windspeed_direction['Date (Local Standard Time)'].astype(str) #Converting the dates in the dataframe into strings so that they can be displayed in the graph easily.
+monthly_average_windspeed_direction['Date as String'] = monthly_average_windspeed_direction['Date (Local Standard Time)'].dt.strftime('%b %Y') #Converting the dates in the dataframe into strings so that they can be displayed in the graph easily.
 
 
 fig = go.Figure() #Initializes the figure
@@ -72,4 +72,5 @@ fig.update_layout(
 
 
 )
+
 fig.show()
