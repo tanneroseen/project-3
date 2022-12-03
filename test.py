@@ -3,10 +3,11 @@ import pandas as pd
 import streamlit as st
 from datetime import datetime as dt
 from datetime import date
+import pytz
 
 st.set_page_config(
     page_title = 'Project 3',
-    page_icon = ':shark:',
+    page_icon = ':monkey:',
     layout = 'centered'
 )
 
@@ -22,49 +23,54 @@ jasper_data = jasper_data[jasper_data['Wind Dir. 10 m Avg. Record Completeness (
 
 avg_precip = jasper_data.groupby(pd.Grouper(key= 'Date (Local Standard Time)', freq='M'))['Precip. (mm)'].sum() #Sums the percipitation in each month
 avg_temp = jasper_data.groupby(pd.Grouper(key= 'Date (Local Standard Time)', freq='M'))['Air Temp. Avg. (C)'].mean() #Does the avg monthly air temp from the daily averages
-min_temp = min_grouped_by_week = jasper_data.groupby(pd.Grouper(key = 'Date (Local Standard Time)', freq = 'M'))['Air Temp. Min. (C)'].min()
+min_grouped_by_week = jasper_data.groupby(pd.Grouper(key = 'Date (Local Standard Time)', freq = 'W-SUN'))['Air Temp. Min. (C)'].min()
+max_grouped_by_week = jasper_data.groupby(pd.Grouper(key = 'Date (Local Standard Time)', freq = 'W-SUN'))['Air Temp. Max. (C)'].max()
+date_range = min_grouped_by_week.keys() #grabs each date (start of each week grouped by) that is used by all graphs as common x-values
+differce_in_max_and_min = max_grouped_by_week - min_grouped_by_week
 
 fancy_page_stuff = """
 <style>
-[data-testid="stAppViewContainer"] {
-    background-color: #d692fc
-}
-
-[data-testid="stHeader"] {
-    background-color: #d692fc
+[data-testid="stAppViewContainer"] > .main{
+    background-image: url('https://static.vecteezy.com/system/resources/thumbnails/007/515/187/original/timelapse-of-beautiful-blue-sky-in-pure-daylight-with-puffy-fluffy-white-clouds-background-amazing-flying-through-beautiful-thick-fluffy-clouds-nature-and-cloudscape-concept-free-video.jpg');
 }
 
 [data-testid="stVerticalBlock"] {
-    background-color: #d692fc
+    margin: auto;
+    width: 750px;
+    padding: 20px;
+    background-color: rgba(255,255,255,0.6)
+}
+
+[data-testid="stHeader"] {
+    background-color: rgba(0,0,0,0)
+}
+
+[data-testid="stToolbar"] {
+    right: 2rem
 }
 </style>
 """
 
 st.markdown(fancy_page_stuff, unsafe_allow_html=True)
 
-current_time = start_time = dt.strftime(dt.now(),'%X') 
-current_date = date.today().strftime("%B %d, %Y")
+#current_time = start_time = dt.strftime(dt.now(pytz.timezone('Canada/Mountain')),'%X') 
+#current_date = date.today().strftime("%B %d, %Y")
+
+now = dt.now(pytz.timezone('Canada/Mountain')).strftime('%B %d, %Y %X')
 
 st.write(
     'The current date and time is: ',
-    current_date,
-    ' at ',
-    current_time
+    now
 )
 
 option = st.multiselect(
     'What graphs would you like to display?',
-    ['Precipitation', 'Average Temp', 'Min Temp'],
+    ['Precipitation', 'Temperature', 'Wind'],
     []
 )
 
-fig1 = go.Figure()
-fig2 = go.Figure()
-fig3 = go.Figure()
-
 if 'Precipitation' in option:
-    st.info('Precipitation shown below')
-
+    fig1 = go.Figure()
     fig1.add_trace(go.Scatter(
         x = pd.date_range("2019-10-03", "2022-11-03", freq='M'),
         y = avg_temp,
@@ -85,7 +91,9 @@ if 'Precipitation' in option:
         title = "Precipitation",
         xaxis_title = 'Date',
         yaxis_title = 'Temperature',
-        paper_bgcolor = '#d692fc'
+        #paper_bgcolor = '#d692fc',
+        plot_bgcolor = 'rgba(0,0,0,0.2)',
+        paper_bgcolor = 'rgba(0,0,0,0)'
     )
 
 
@@ -97,18 +105,69 @@ if 'Precipitation' in option:
             'The size of each bubble represents the ammount of precipitation in the month and the colour corresponds to the type of precipitation whether that is rain or snow.'
         )
 
-if 'Average Temp' in option:   
+if 'Temperature' in option:   
+    fig3 = go.Figure()
+    fig3.add_trace(go.Scatter(
+        x = date_range,
+        y = [0 for i in range(len(date_range))],
+        name = '0\u00B0 C',
+        opacity = 0.5,
+        line = dict(color = 'black')
+        ))
+    fig3.add_trace(go.Scatter(
+        x = date_range,
+        y = min_grouped_by_week,
+        name = 'Minimum Temperature',
+        mode = "lines+markers",
+        line = dict(color = '#0000FF')
+        ))
+    fig3.add_trace(go.Scatter(
+        x = date_range,
+        y = max_grouped_by_week,
+        name = 'Maximum Temperature',
+        mode = 'lines+markers',
+        line = dict(color = '#FF0000')
+        ))
+    fig3.add_trace(go.Scatter(
+        x = date_range,
+        y = differce_in_max_and_min,
+        name = 'Difference in Min and Max Temperatures',
+        mode = 'lines+markers',
+        line = dict(color = '#00FF00')
+        ))
+    fig3.update_layout(
+        title = 'Weekly Temperature Extremes and their Difference',
+        xaxis_title = 'Date',
+        yaxis_title = 'Temperature (\u00B0C)',
+        plot_bgcolor = 'rgba(0,0,0,0.2)',
+        paper_bgcolor = 'rgba(0,0,0,0)',
+        legend=dict(
+            orientation="h",
+            yanchor="bottom",
+            y=1.02,
+            xanchor="right",
+            x=1
+        ))
+
+    st.plotly_chart(fig3)
+
+    with st.expander("Explanation"):
+        st.write(
+            'The above chart displays date vs temperature throughout each month from October 2019 to September 2022.',
+            'The size of each bubble represents the ammount of precipitation in the month and the colour corresponds to the type of precipitation whether that is rain or snow.'
+        )
+
+if 'Wind' in option:
+    fig2 = go.Figure()
     fig2.add_trace(go.Scatter(
         x=pd.date_range("2019-10-03", "2022-11-03", freq='M'),
-        y=avg_temp),
+        y=min_grouped_by_week),
     )
 
     st.plotly_chart(fig2)
 
-if 'Min Temp' in option:
-    fig3.add_trace(go.Scatter(
-        x=pd.date_range("2019-10-03", "2022-11-03", freq='M'),
-        y=min_temp),
-    )
-
-    st.plotly_chart(fig3)
+    with st.expander("Explanation"):
+        st.write(
+            'The above chart displays date vs temperature throughout each month from October 2019 to September 2022.',
+            'The size of each bubble represents the ammount of precipitation in the month and the colour corresponds to the type of precipitation whether that is rain or snow.'
+        )
