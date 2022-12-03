@@ -33,7 +33,7 @@ for count, direction in enumerate(monthly_average_windspeed_direction['Wind Dir.
         monthly_average_windspeed_direction.iloc[count, 2] = 'N-W'
     elif (337.5 < direction < 360) or (0 < direction < 22.5):
         monthly_average_windspeed_direction.iloc[count, 2] = 'North'
-    elif (22.5 < direction < 67.5) or (0 < direction < 22.5):
+    elif (22.5 < direction < 67.5):
         monthly_average_windspeed_direction.iloc[count, 2] = 'N-E'
 
 monthly_average_windspeed_direction['Date as String'] = monthly_average_windspeed_direction['Date (Local Standard Time)'].dt.strftime('%b %Y') #Converting the dates in the dataframe into strings so that they can be displayed in the graph easily.
@@ -41,7 +41,7 @@ monthly_average_windspeed_direction['Date as String'] = monthly_average_windspee
 
 fig = go.Figure() #Initializes the figure
 
-fig.add_trace(go.Scatterpolar( #Polar Scatter plot is created with all of the listed values
+fig.add_trace(go.Scatterpolar( #Polar scatter plot is created with all of the listed values
     r = r,
     theta = theta,
     mode = 'markers',
