@@ -56,7 +56,7 @@ for count, direction in enumerate(monthly_average_windspeed_direction['Wind Dir.
 monthly_average_windspeed_direction['Date as String'] = monthly_average_windspeed_direction['Date (Local Standard Time)'].dt.strftime('%b %Y') #Converting the dates in the dataframe into strings so that they can be displayed in the graph easily.
 #All for windspeed graph above
 
-fancy_page_stuff = """
+page_css = """
 <style>
 [data-testid="stAppViewContainer"] > .main{
     background-image: url('https://static.vecteezy.com/system/resources/thumbnails/007/515/187/original/timelapse-of-beautiful-blue-sky-in-pure-daylight-with-puffy-fluffy-white-clouds-background-amazing-flying-through-beautiful-thick-fluffy-clouds-nature-and-cloudscape-concept-free-video.jpg');
@@ -79,17 +79,27 @@ fancy_page_stuff = """
 </style>
 """
 
-st.markdown(fancy_page_stuff, unsafe_allow_html=True)
-
-#current_time = start_time = dt.strftime(dt.now(pytz.timezone('Canada/Mountain')),'%X') 
-#current_date = date.today().strftime("%B %d, %Y")
+st.markdown(page_css, unsafe_allow_html=True)
 
 now = dt.now(pytz.timezone('Canada/Mountain')).strftime('%B %d, %Y %X')
+
+st.title(
+    'ENDG 310 Project 3'
+)
+
+st.write(
+    'By: Tanner Oseen, Reid Moline, Morgan Hendry, and Gavin Scott'
+)
 
 st.write(
     'The current date and time is: ',
     now
 )
+
+url = "https://www.streamlit.io"
+st.write("check out this [link](%s)" % url)
+st.markdown("check out this [link](%s)" % url)
+
 
 option = st.multiselect(
     'What graphs would you like to display?',
@@ -181,8 +191,7 @@ if 'Temperature' in option:
 
     with st.expander("Explanation"):
         st.write(
-            'The above chart displays date vs temperature throughout each month from October 2019 to September 2022.',
-            'The size of each bubble represents the ammount of precipitation in the month and the colour corresponds to the type of precipitation whether that is rain or snow.'
+            'The above chart displays date vs maximum, minimum, and average temperature throughout each week from October 2019 to September 2022.',
         )
 
 if 'Wind' in option:
@@ -224,6 +233,6 @@ if 'Wind' in option:
 
     with st.expander("Explanation"):
         st.write(
-            'The above chart displays date vs temperature throughout each month from October 2019 to September 2022.',
-            'The size of each bubble represents the ammount of precipitation in the month and the colour corresponds to the type of precipitation whether that is rain or snow.'
+            'The above chart displays date vs average windspeed and direction throughout each month from October 2019 to September 2022.',
+            'The size and colour of each bubble represent the average strength of the wind in that month.'
         )
