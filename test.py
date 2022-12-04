@@ -96,9 +96,10 @@ st.write(
     now
 )
 
-url = "https://www.streamlit.io"
-st.write("check out this [link](%s)" % url)
-st.markdown("check out this [link](%s)" % url)
+url = "https://acis.alberta.ca/weather-data-viewer.jsp"
+st.write(
+    "More recent data is available [here](%s)" % url
+)
 
 
 option = st.multiselect(
