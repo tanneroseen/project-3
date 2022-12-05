@@ -56,6 +56,8 @@ for count, direction in enumerate(monthly_average_windspeed_direction['Wind Dir.
 monthly_average_windspeed_direction['Date as String'] = monthly_average_windspeed_direction['Date (Local Standard Time)'].dt.strftime('%b %Y') #Converting the dates in the dataframe into strings so that they can be displayed in the graph easily.
 #All for windspeed graph above
 
+padding = 0
+
 page_css = """
 <style>
 .reportview-container .main .block-container{
