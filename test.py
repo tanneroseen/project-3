@@ -229,8 +229,10 @@ if 'Wind' in option:
         title=dict(
             'Monthly Average Windspeed and Direction Recorded in Jasper National Park',
             font=dict(
-                size=14,
-            )
+                family="Arial",
+                size=20,
+                color='#000000'
+            ),
             
         ),
         polar_radialaxis_ticksuffix='',
