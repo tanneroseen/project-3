@@ -123,7 +123,7 @@ if 'Precipitation' in option:
             colorscale="Viridis",
             size=avg_precip,
             colorbar = dict(
-                title="Temperature",
+                title="Type of Precipitation",
                 tickvals = [-10,0,15],
                 ticktext = ['Snow', 'Sleet', 'Rain']
             ),
@@ -133,7 +133,7 @@ if 'Precipitation' in option:
     fig1.update_layout(
         title = "Precipitation",
         xaxis_title = 'Date',
-        yaxis_title = 'Temperature',
+        yaxis_title = 'Temperature \u00B0 C',
         #paper_bgcolor = '#d692fc',
         plot_bgcolor = 'rgba(0,0,0,0.2)',
         paper_bgcolor = 'rgba(0,0,0,0)'
@@ -145,7 +145,7 @@ if 'Precipitation' in option:
     with st.expander("Explanation"):
         st.write(
             'The above chart displays date vs temperature throughout each month from October 2019 to September 2022.',
-            'The size of each bubble represents the ammount of precipitation in the month and the colour corresponds to the type of precipitation whether that is rain or snow.'
+            'The size of each bubble represents the amount of precipitation in the month and the colour corresponds to the type of precipitation whether that is rain or snow.'
         )
 
 if 'Temperature' in option:   
@@ -162,21 +162,21 @@ if 'Temperature' in option:
         y = min_grouped_by_week,
         name = 'Minimum Temperature',
         mode = "lines+markers",
-        line = dict(color = '#0000FF')
+        #line = dict(color = '#0000FF')
         ))
     fig3.add_trace(go.Scatter(
         x = date_range,
         y = max_grouped_by_week,
         name = 'Maximum Temperature',
         mode = 'lines+markers',
-        line = dict(color = '#FF0000')
+        #line = dict(color = '#FF0000')
         ))
     fig3.add_trace(go.Scatter(
         x = date_range,
         y = differce_in_max_and_min,
         name = 'Difference in Min and Max Temperatures',
         mode = 'lines+markers',
-        line = dict(color = '#00FF00')
+        #line = dict(color = '#00FF00')
         ))
     fig3.update_layout(
         title = 'Weekly Temperature Extremes and their Difference',
