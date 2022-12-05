@@ -92,10 +92,6 @@ st.write('''
     Weather Data Recorded in Jasper National Park
 ''')
 
-st.caption(
-    'Weather Data Recorded in Jasper National Park'
-)
-
 st.write(
     'By: Tanner Oseen, Reid Moline, Morgan Hendry, and Gavin Scott'
 )
