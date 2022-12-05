@@ -250,7 +250,7 @@ if 'Wind' in option:
         polar_radialaxis_ticksuffix='',
         polar_angularaxis_rotation=90,
         polar_angularaxis_direction = 'clockwise',
-        plot_bgcolor = 'rgba(0,0,0,0.2)',
+        #plot_bgcolor = 'rgba(0,0,0,0.2)',
         paper_bgcolor = 'rgba(0,0,0,0)'
     )
 
