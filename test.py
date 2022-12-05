@@ -158,7 +158,7 @@ if 'Precipitation' in option:
 
     with st.expander("Explanation"):
         st.write(
-            'The above chart displays date vs temperature throughout each month from October 2019 to September 2022.',
+            'The above chart displays date vs temperature throughout each month from October 2019 to September 2022.'
             'The size of each bubble represents the amount of precipitation in the month and the colour corresponds to the type of precipitation whether that is rain or snow.'
         )
 
