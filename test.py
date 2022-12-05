@@ -59,7 +59,8 @@ monthly_average_windspeed_direction['Date as String'] = monthly_average_windspee
 #The data-testid="stAppViewContainer" part is the whole page and is where we put the background along with its specifications
 #The data-testid="stVerticalBlock" part is for the column in the middle with the text and graphs which has the background colour for 
 # the section and paddings and width, box-sizing changes the padding of the expander elements
-#The 
+#The header and toolbar parts are for the very top of the page and makes the top bar clear and shifts the toolbar a little to the left 
+# so it's more visible
 page_css = """
 <style>
 [data-testid="stAppViewContainer"] > .main {
@@ -88,10 +89,12 @@ page_css = """
 </style>
 """
 
-st.markdown(page_css, unsafe_allow_html=True)
+st.markdown(page_css, unsafe_allow_html=True)  #Takes the CSS and applies it to the page
 
-now = dt.now(pytz.timezone('Canada/Mountain')).strftime('%B %d, %Y %X')
+now = dt.now(pytz.timezone('Canada/Mountain')).strftime('%B %d, %Y %X')  #Gets the current date and time
 
+
+#Each write section is a different section of text
 st.write('''
     # ENDG 310 Project 3
     _Weather Data Recorded in Jasper National Park_
@@ -101,75 +104,82 @@ st.write(
     'By: Tanner Oseen, Reid Moline, Morgan Hendry, and Gavin Scott'
 )
 
+#Shows the current date and time
 st.write(
     'The current date and time is: ',
     now
 )
 
+#Has a hyperlink to the page where we got our data
 url = "https://acis.alberta.ca/weather-data-viewer.jsp"
 st.write(
     "More recent data is available [here](%s)" % url
 )
 
-
+#The multiselect bar that allows freedom for what graphs are displayed
 option = st.multiselect(
     'What graphs would you like to display?',
     ['Precipitation', 'Temperature', 'Wind'],
     []
 )
 
+#Italics graph "instructions"
 st.write('''
     _Graphs can be zoomed and scrolled over to see data points._
     _Click the home button at the top of each graph to reset axis._
     _Lines on the tremperature graph can be turned on and off as desired._
 ''')
 
-if 'Precipitation' in option:
+#The next parts show each graph if it has been selected in the multiselect bar
+#Each graph has similar customization with regard to colours and text
+if 'Precipitation' in option:  #First precipitation graph
     fig1 = go.Figure()
     fig1.add_trace(go.Scatter(
-        x = pd.date_range("2019-10-03", "2022-11-03", freq='M'),
+        x = pd.date_range("2019-10-03", "2022-11-03", freq='M'), #Date range for data
         y = avg_temp,
-        mode='markers',
-        marker=dict(
-            color=avg_temp,
-            colorscale="Viridis",
-            size=avg_precip,
-            colorbar = dict(
-                title="Type of Precipitation",
-                tickvals = [-10,0,15],
-                ticktext = ['Snow', 'Sleet', 'Rain']
+        mode='markers', #Sets what the plot looks like whether that's lines or dots or a combination of both
+        marker=dict( 
+            color=avg_temp, #Variable colour for the points
+            colorscale="Viridis", #Theme of colour
+            size=avg_precip, #Size of points
+            colorbar = dict( 
+                title="Type of Precipitation", #Title for colour bar
+                tickvals = [-10,0,15],  #Potistion of colourbar labels
+                ticktext = ['Snow', 'Sleet', 'Rain'] #Colour bar labels
             ),
         ),
     ))
 
+    #Updates final visuals for the graph
     fig1.update_layout(
         title = dict(
             text="Monthly Average Precipitation Type and Amount",
             font=dict(
                 family="Arial",
-                size=20,
+                size=20,    #Allows the title to have a different font size than the rest of the graph
                 color='#000000'
             ),
         ),
         xaxis_title = 'Date',
-        yaxis_title = 'Temperature (\u00B0C)',
-        #paper_bgcolor = '#d692fc',
-        plot_bgcolor = 'rgba(255, 255, 255, 0.3)',
-        paper_bgcolor = 'rgba(0,0,0,0)'
+        yaxis_title = 'Temperature (\u00B0C)',  #Temperature with degrees sign
+        plot_bgcolor = 'rgba(255, 255, 255, 0.3)',  #Colour of the data area, set to white with 30% opacity
+        paper_bgcolor = 'rgba(0,0,0,0)' #Colour of the whole plot, set to transparent
     )
 
 
-    st.plotly_chart(fig1)
+    st.plotly_chart(fig1)   #Final display of the chart
 
+    #An expander that displays the information of the graph
     with st.expander("Explanation"):
         st.write(
             'The above chart displays date vs temperature throughout each month from October 2019 to September 2022.'
             'The size of each bubble represents the amount of precipitation in the month and the colour corresponds to the type of precipitation whether that is rain or snow.'
         )
 
+#Temperature graph with similar customization to precipitation graph
 if 'Temperature' in option:   
     fig3 = go.Figure()
-    fig3.add_trace(go.Scatter(
+    fig3.add_trace(go.Scatter(  #Each trace is a different line for min, max, and difference of temperatures as well as mid line for 0 degrees C
         x = date_range,
         y = [0 for i in range(len(date_range))],
         name = '0\u00B0 C',
@@ -180,22 +190,19 @@ if 'Temperature' in option:
         x = date_range,
         y = min_grouped_by_week,
         name = 'Minimum Temperature',
-        mode = "lines+markers",
-        #line = dict(color = '#0000FF')
+        mode = "lines+markers", #Plots a line with points where the data is 
         ))
     fig3.add_trace(go.Scatter(
         x = date_range,
         y = max_grouped_by_week,
         name = 'Maximum Temperature',
         mode = 'lines+markers',
-        #line = dict(color = '#FF0000')
         ))
     fig3.add_trace(go.Scatter(
         x = date_range,
         y = differce_in_max_and_min,
         name = 'Difference in Min and Max Temperatures',
         mode = 'lines+markers',
-        #line = dict(color = '#00FF00')
         ))
     fig3.update_layout(
         title = dict(
@@ -211,7 +218,7 @@ if 'Temperature' in option:
         plot_bgcolor = 'rgba(255, 255, 255, 0.3)',
         paper_bgcolor = 'rgba(0,0,0,0)',
         legend=dict(
-            orientation="h",
+            orientation="h",    #Orients the legend horizontally and specifies position
             yanchor="bottom",
             y=1.02,
             xanchor="right",
@@ -225,6 +232,7 @@ if 'Temperature' in option:
             'The above chart displays date vs maximum, minimum, and average temperature throughout each week from October 2019 to September 2022.',
         )
 
+#Wind speed and direction graph
 if 'Wind' in option:
     fig2 = go.Figure() #Initializes the figure
 
@@ -262,7 +270,6 @@ if 'Wind' in option:
         polar_radialaxis_ticksuffix='',
         polar_angularaxis_rotation=90,
         polar_angularaxis_direction = 'clockwise',
-        #plot_bgcolor = 'rgba(0,0,0,0.2)',
         polar = dict(bgcolor = "rgba(255, 255, 255, 0.3)"),
         paper_bgcolor = 'rgba(0,0,0,0)'
     )
