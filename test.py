@@ -142,7 +142,7 @@ if 'Precipitation' in option:
         xaxis_title = 'Date',
         yaxis_title = 'Temperature (\u00B0C)',
         #paper_bgcolor = '#d692fc',
-        plot_bgcolor = 'rgba(0,0,0,0.2)',
+        plot_bgcolor = 'rgba(255, 255, 255, 0.3)',
         paper_bgcolor = 'rgba(0,0,0,0)'
     )
 
@@ -196,7 +196,7 @@ if 'Temperature' in option:
         ),
         xaxis_title = 'Date',
         yaxis_title = 'Temperature (\u00B0C)',
-        plot_bgcolor = 'rgba(0,0,0,0.2)',
+        plot_bgcolor = 'rgba(255, 255, 255, 0.3)',
         paper_bgcolor = 'rgba(0,0,0,0)',
         legend=dict(
             orientation="h",
