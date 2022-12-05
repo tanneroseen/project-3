@@ -132,7 +132,7 @@ if 'Precipitation' in option:
 
     fig1.update_layout(
         title = dict(
-            text="Precipitation",
+            text="Precipitation Type and Amount",
             font=dict(
                 family="Arial",
                 size=20,
