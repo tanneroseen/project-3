@@ -132,8 +132,9 @@ if 'Precipitation' in option:
 
     fig1.update_layout(
         title = "Precipitation",
+        font_size=14,
         xaxis_title = 'Date',
-        yaxis_title = 'Temperature \u00B0 C',
+        yaxis_title = 'Temperature \u00B0C',
         #paper_bgcolor = '#d692fc',
         plot_bgcolor = 'rgba(0,0,0,0.2)',
         paper_bgcolor = 'rgba(0,0,0,0)'
@@ -180,6 +181,7 @@ if 'Temperature' in option:
         ))
     fig3.update_layout(
         title = 'Weekly Temperature Extremes and their Difference',
+        font_size=14,
         xaxis_title = 'Date',
         yaxis_title = 'Temperature (\u00B0C)',
         plot_bgcolor = 'rgba(0,0,0,0.2)',
@@ -225,8 +227,7 @@ if 'Wind' in option:
 
     fig2.update_layout(
         title='Monthly Average Windspeed and Direction Recorded in Jasper National Park',
-        font_size=16,
-        legend_font_size=16,
+        font_size=14,
         polar_radialaxis_ticksuffix='',
         polar_angularaxis_rotation=90,
         polar_angularaxis_direction = 'clockwise',
