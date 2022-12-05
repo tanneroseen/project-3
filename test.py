@@ -227,7 +227,7 @@ if 'Wind' in option:
 
     fig2.update_layout(
         title=dict(
-            'Monthly Average Windspeed and Direction Recorded in Jasper National Park',
+            text='Monthly Average Windspeed and Direction Recorded in Jasper National Park',
             font=dict(
                 family="Arial",
                 size=20,
