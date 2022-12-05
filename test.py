@@ -58,6 +58,13 @@ monthly_average_windspeed_direction['Date as String'] = monthly_average_windspee
 
 page_css = """
 <style>
+.reportview-container .main .block-container{
+        padding-top: {padding}rem;
+        padding-right: {padding}rem;
+        padding-left: {padding}rem;
+        padding-bottom: {padding}rem;
+}
+
 [data-testid="stAppViewContainer"] > .main {
     background-image: url('https://static.vecteezy.com/system/resources/thumbnails/007/515/187/original/timelapse-of-beautiful-blue-sky-in-pure-daylight-with-puffy-fluffy-white-clouds-background-amazing-flying-through-beautiful-thick-fluffy-clouds-nature-and-cloudscape-concept-free-video.jpg');
     background-size: 400%;
