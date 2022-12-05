@@ -88,7 +88,7 @@ st.markdown(page_css, unsafe_allow_html=True)
 now = dt.now(pytz.timezone('Canada/Mountain')).strftime('%B %d, %Y %X')
 
 st.write('''
-    #ENDG 310 Project 3
+    # ENDG 310 Project 3
     Weather Data Recorded in Jasper National Park
 ''')
 
