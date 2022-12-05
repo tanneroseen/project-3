@@ -131,7 +131,14 @@ if 'Precipitation' in option:
     ))
 
     fig1.update_layout(
-        title = "Precipitation",
+        title = dict(
+            text="Precipitation",
+            font=dict(
+                family="Arial",
+                size=20,
+                color='#000000'
+            ),
+        ),
         font_size=14,
         xaxis_title = 'Date',
         yaxis_title = 'Temperature \u00B0C',
@@ -180,7 +187,14 @@ if 'Temperature' in option:
         #line = dict(color = '#00FF00')
         ))
     fig3.update_layout(
-        title = 'Weekly Temperature Extremes and their Difference',
+        title = dict(
+            text='Weekly Temperature Extremes and their Difference',
+            font=dict(
+                family="Arial",
+                size=20,
+                color='#000000'
+            ),
+        ),
         font_size=14,
         xaxis_title = 'Date',
         yaxis_title = 'Temperature (\u00B0C)',
