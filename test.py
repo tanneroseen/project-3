@@ -91,7 +91,7 @@ st.title(
     'ENDG 310 Project 3'
 )
 
-st.header(
+st.caption(
     'Weather Data Recorded in Jasper National Park'
 )
 
