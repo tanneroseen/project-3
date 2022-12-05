@@ -139,7 +139,6 @@ if 'Precipitation' in option:
                 color='#000000'
             ),
         ),
-        font_size=14,
         xaxis_title = 'Date',
         yaxis_title = 'Temperature \u00B0C',
         #paper_bgcolor = '#d692fc',
@@ -195,7 +194,6 @@ if 'Temperature' in option:
                 color='#000000'
             ),
         ),
-        font_size=14,
         xaxis_title = 'Date',
         yaxis_title = 'Temperature (\u00B0C)',
         plot_bgcolor = 'rgba(0,0,0,0.2)',
