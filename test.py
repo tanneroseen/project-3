@@ -89,7 +89,7 @@ now = dt.now(pytz.timezone('Canada/Mountain')).strftime('%B %d, %Y %X')
 
 st.write('''
     # ENDG 310 Project 3
-    Weather Data Recorded in Jasper National Park
+    _Weather Data Recorded in Jasper National Park_
 ''')
 
 st.write(
