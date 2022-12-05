@@ -60,7 +60,7 @@ padding = 30
 
 page_css = """
 <style>
-.reportview-container .main .block-container{
+[class="styles_stateContainer__29Rp6"]{
         padding-top: {padding}rem;
         padding-right: {padding}rem;
         padding-left: {padding}rem;
