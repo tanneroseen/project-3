@@ -114,8 +114,8 @@ option = st.multiselect(
 )
 
 st.write('''
-    _Graphs can be zoomed and scrolled over to see data points. _
-    _Click the home button at the top of each graph to reset axis. _
+    _Graphs can be zoomed and scrolled over to see data points._
+    _Click the home button at the top of each graph to reset axis._
     _Lines on the tremperature graph can be turned on and off as desired._
 ''')
 
