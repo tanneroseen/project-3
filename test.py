@@ -72,7 +72,8 @@ page_css = """
     margin: auto;
     width: 750px;
     padding: 20px;
-    background-color: rgba(195, 220, 238, 0.8)
+    background-color: rgba(195, 220, 238, 0.8);
+    box-sizing: content-box
 }
 
 [data-testid="stHeader"] {
