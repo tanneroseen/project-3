@@ -60,13 +60,6 @@ padding = 30
 
 page_css = """
 <style>
-[class="styles_stateContainer__29Rp6"]{
-        padding-top: {padding}rem;
-        padding-right: {padding}rem;
-        padding-left: {padding}rem;
-        padding-bottom: {padding}rem;
-}
-
 [data-testid="stAppViewContainer"] > .main {
     background-image: url('https://static.vecteezy.com/system/resources/thumbnails/007/515/187/original/timelapse-of-beautiful-blue-sky-in-pure-daylight-with-puffy-fluffy-white-clouds-background-amazing-flying-through-beautiful-thick-fluffy-clouds-nature-and-cloudscape-concept-free-video.jpg');
     background-size: 400%;
@@ -88,6 +81,10 @@ page_css = """
 
 [data-testid="stToolbar"] {
     right: 2rem
+}
+
+[data-testid="stMarkdownContainer"] {
+    padding: 100
 }
 </style>
 """
