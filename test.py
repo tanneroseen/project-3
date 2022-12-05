@@ -91,6 +91,10 @@ st.title(
     'ENDG 310 Project 3'
 )
 
+st.header(
+    'Weather Data Recorded in Jasper National Park'
+)
+
 st.write(
     'By: Tanner Oseen, Reid Moline, Morgan Hendry, and Gavin Scott'
 )
@@ -132,7 +136,7 @@ if 'Precipitation' in option:
 
     fig1.update_layout(
         title = dict(
-            text="Precipitation Type and Amount",
+            text="Monthly Average Precipitation Type and Amount",
             font=dict(
                 family="Arial",
                 size=20,
@@ -239,7 +243,7 @@ if 'Wind' in option:
 
     fig2.update_layout(
         title=dict(
-            text='Monthly Average Windspeed and Direction Recorded in Jasper National Park',
+            text='Monthly Average Windspeed and Direction',
             font=dict(
                 family="Arial",
                 size=20,
