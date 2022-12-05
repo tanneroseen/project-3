@@ -113,6 +113,12 @@ option = st.multiselect(
     []
 )
 
+st.write('''
+    _Graphs can be zoomed and scrolled over to see data points_
+    _Click the home button at the top of each graph to reset axis_
+    _Lines on the tremperature graph can be turned on and off as desired_
+''')
+
 if 'Precipitation' in option:
     fig1 = go.Figure()
     fig1.add_trace(go.Scatter(
