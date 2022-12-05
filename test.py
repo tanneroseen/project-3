@@ -70,7 +70,7 @@ page_css = """
     margin: auto;
     width: 750px;
     padding: 20px;
-    background-color: rgba(195, 220, 238, 0.6)
+    background-color: rgba(195, 220, 238, 0.8)
 }
 
 [data-testid="stHeader"] {
