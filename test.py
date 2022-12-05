@@ -228,7 +228,10 @@ if 'Wind' in option:
     fig2.update_layout(
         title=dict(
             'Monthly Average Windspeed and Direction Recorded in Jasper National Park',
-            size=14,
+            font=dict(
+                size=14,
+            )
+            
         ),
         polar_radialaxis_ticksuffix='',
         polar_angularaxis_rotation=90,
