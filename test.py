@@ -2,10 +2,9 @@ import plotly.graph_objects as go
 import pandas as pd
 import streamlit as st
 from datetime import datetime as dt
-from datetime import date
 import pytz
 
-st.set_page_config(
+st.set_page_config(  #This sets the page name and icon at the top of the browser
     page_title = 'Project 3',
     page_icon = ':monkey:',
     layout = 'centered'
@@ -26,7 +25,7 @@ avg_temp = jasper_data.groupby(pd.Grouper(key= 'Date (Local Standard Time)', fre
 min_grouped_by_week = jasper_data.groupby(pd.Grouper(key = 'Date (Local Standard Time)', freq = 'W-SUN'))['Air Temp. Min. (C)'].min()
 max_grouped_by_week = jasper_data.groupby(pd.Grouper(key = 'Date (Local Standard Time)', freq = 'W-SUN'))['Air Temp. Max. (C)'].max()
 date_range = min_grouped_by_week.keys() #grabs each date (start of each week grouped by) that is used by all graphs as common x-values
-differce_in_max_and_min = max_grouped_by_week - min_grouped_by_week
+differce_in_max_and_min = max_grouped_by_week - min_grouped_by_week #Difference between max temperature and min temperature in a month
 
 #All for Windspeed graph below
 monthly_average_windspeed = jasper_data.groupby(pd.Grouper(key='Date (Local Standard Time)',freq='MS'))['Wind Speed 10 m Avg. (km/h)'].mean().reset_index()  #Groups wind speed data by the respective month and takes the average of it
@@ -54,10 +53,13 @@ for count, direction in enumerate(monthly_average_windspeed_direction['Wind Dir.
         monthly_average_windspeed_direction.iloc[count, 2] = 'N-E'
 
 monthly_average_windspeed_direction['Date as String'] = monthly_average_windspeed_direction['Date (Local Standard Time)'].dt.strftime('%b %Y') #Converting the dates in the dataframe into strings so that they can be displayed in the graph easily.
-#All for windspeed graph above
 
-padding = 30
-
+#Streamlit doesn't natively support some changes to the webpage so this CSS does that
+#Each [] section is a different part in the page 
+#The data-testid="stAppViewContainer" part is the whole page and is where we put the background along with its specifications
+#The data-testid="stVerticalBlock" part is for the column in the middle with the text and graphs which has the background colour for 
+# the section and paddings and width, box-sizing changes the padding of the expander elements
+#The 
 page_css = """
 <style>
 [data-testid="stAppViewContainer"] > .main {
@@ -82,10 +84,6 @@ page_css = """
 
 [data-testid="stToolbar"] {
     right: 2rem
-}
-
-[data-testid="stMarkdownContainer"] {
-    padding: 10
 }
 </style>
 """
