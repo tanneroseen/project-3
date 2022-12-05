@@ -251,7 +251,7 @@ if 'Wind' in option:
         polar_angularaxis_rotation=90,
         polar_angularaxis_direction = 'clockwise',
         #plot_bgcolor = 'rgba(0,0,0,0.2)',
-        polar = dict(bgcolor = "rgba(255, 255, 255, 0.2)"),
+        polar = dict(bgcolor = "rgba(255, 255, 255, 0.3)"),
         paper_bgcolor = 'rgba(0,0,0,0)'
     )
 
