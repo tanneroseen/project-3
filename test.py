@@ -84,7 +84,7 @@ page_css = """
 }
 
 [data-testid="stMarkdownContainer"] {
-    padding: 100
+    padding: 10
 }
 </style>
 """
