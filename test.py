@@ -6,7 +6,7 @@ import pytz
 
 st.set_page_config(  #This sets the page name and icon at the top of the browser
     page_title = 'Project 3',
-    page_icon = ':monkey:',
+    page_icon = ':cloud:',
     layout = 'centered'
 )
 
