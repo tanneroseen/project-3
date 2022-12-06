@@ -41,11 +41,11 @@ for count, direction in enumerate(monthly_average_windspeed_direction['Wind Dir.
         monthly_average_windspeed_direction.iloc[count, 2] = 'S-E'
     elif 157.5 < direction < 202.5:
         monthly_average_windspeed_direction.iloc[count, 2] = 'South'
-    if 202.5 < direction < 247.5:
+    elif 202.5 < direction < 247.5:
         monthly_average_windspeed_direction.iloc[count, 2] = 'S-W'
     elif 247.5 < direction < 292.5:
         monthly_average_windspeed_direction.iloc[count, 2] = 'West'
-    if 292.5 < direction < 337.5:
+    elif 292.5 < direction < 337.5:
         monthly_average_windspeed_direction.iloc[count, 2] = 'N-W'
     elif (337.5 < direction < 360) or (0 < direction < 22.5):
         monthly_average_windspeed_direction.iloc[count, 2] = 'North'
@@ -288,5 +288,7 @@ st.subheader(
 
 st.write('''
     1. Plotly. (n.d.). Plotly. Plotly Python Graphing Library. Retrieved December 6, 2022, from https://plotly.com/python/ \n
-    2. Plotly. (n.d.). Python API reference for plotly¶. Python API reference for plotly - 5.11.0 documentation. Retrieved December 6, 2022, from https://plotly.com/python-api-reference/ 
+    2. Plotly. (n.d.). Python API reference for plotly¶. Python API reference for plotly - 5.11.0 documentation. Retrieved December 6, 2022, from https://plotly.com/python-api-reference/ \n
+    3. N/A. (n.d.). Current and historical Alberta Weather Station Data Viewer. Retrieved December 6, 2022, from https://acis.alberta.ca/weather-data-viewer.jsp \n
+    4. Veecteezy. Vecteezy. (n.d.). Retrieved December 6, 2022, from https://www.vecteezy.com/free-vector/static 
 ''')
