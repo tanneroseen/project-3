@@ -4,6 +4,9 @@ import streamlit as st
 from datetime import datetime as dt
 import pytz
 
+#We use Streamlit to create our webapp
+#This code will not run on Streamlit without another file called requirements.txt with the names of required modules
+
 st.set_page_config(  #This sets the page name and icon at the top of the browser
     page_title = 'Project 3',
     page_icon = ':cloud:',
@@ -41,11 +44,11 @@ for count, direction in enumerate(monthly_average_windspeed_direction['Wind Dir.
         monthly_average_windspeed_direction.iloc[count, 2] = 'S-E'
     elif 157.5 < direction < 202.5:
         monthly_average_windspeed_direction.iloc[count, 2] = 'South'
-    if 202.5 < direction < 247.5:
+    elif 202.5 < direction < 247.5:
         monthly_average_windspeed_direction.iloc[count, 2] = 'S-W'
     elif 247.5 < direction < 292.5:
         monthly_average_windspeed_direction.iloc[count, 2] = 'West'
-    if 292.5 < direction < 337.5:
+    elif 292.5 < direction < 337.5:
         monthly_average_windspeed_direction.iloc[count, 2] = 'N-W'
     elif (337.5 < direction < 360) or (0 < direction < 22.5):
         monthly_average_windspeed_direction.iloc[count, 2] = 'North'
