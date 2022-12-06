@@ -270,7 +270,6 @@ if 'Wind' in option:
         polar_radialaxis_ticksuffix='',
         polar_angularaxis_rotation=90,
         polar_angularaxis_direction = 'clockwise',
-        polar_radialaxis_angle = 65,
         polar = dict(bgcolor = "rgba(255, 255, 255, 0.3)"),
         paper_bgcolor = 'rgba(0,0,0,0)'
     )
