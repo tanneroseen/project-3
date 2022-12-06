@@ -287,5 +287,6 @@ st.subheader(
 )
 
 st.write('''
-    
+    Plotly. (n.d.). Plotly. Plotly Python Graphing Library. Retrieved December 6, 2022, from https://plotly.com/python/ 
+    Plotly. (n.d.). Python API reference for plotly¶. Python API reference for plotly - 5.11.0 documentation. Retrieved December 6, 2022, from https://plotly.com/python-api-reference/ 
 ''')
