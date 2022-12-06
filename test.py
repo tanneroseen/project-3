@@ -119,7 +119,7 @@ st.write(
 #The multiselect bar that allows freedom for what graphs are displayed
 option = st.multiselect(
     'What graphs would you like to display?',
-    ['Precipitation', 'Temperature', 'Wind'],
+    ['Monthly Precipitation Data', 'Weekly Temperature Data', 'Monthly Wind Data'],
     []
 )
 
@@ -132,7 +132,7 @@ st.write('''
 
 #The next parts show each graph if it has been selected in the multiselect bar
 #Each graph has similar customization with regard to colours and text
-if 'Precipitation' in option:  #First precipitation graph
+if 'Monthly Precipitation Data' in option:  #First precipitation graph
     fig1 = go.Figure()
     fig1.add_trace(go.Scatter(
         x = pd.date_range("2019-10-03", "2022-11-03", freq='M'), #Date range for data
@@ -177,7 +177,7 @@ if 'Precipitation' in option:  #First precipitation graph
         )
 
 #Temperature graph with similar customization to precipitation graph
-if 'Temperature' in option:   
+if 'Weekly Temperature Data' in option:   
     fig3 = go.Figure()
     fig3.add_trace(go.Scatter(  #Each trace is a different line for min, max, and difference of temperatures as well as mid line for 0 degrees C
         x = date_range,
@@ -233,7 +233,7 @@ if 'Temperature' in option:
         )
 
 #Wind speed and direction graph
-if 'Wind' in option:
+if 'Monthly Wind Data' in option:
     fig2 = go.Figure() #Initializes the figure
 
     fig2.add_trace(go.Scatterpolar( #Polar scatter plot is created with all of the listed values
