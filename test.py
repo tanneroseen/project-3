@@ -281,3 +281,11 @@ if 'Wind' in option:
             'The above chart displays date vs average windspeed and direction throughout each month from October 2019 to September 2022.',
             'The size and colour of each bubble represent the average strength of the wind in that month.'
         )
+
+st.subheader(
+    'References'
+)
+
+st.write('''
+    
+''')
