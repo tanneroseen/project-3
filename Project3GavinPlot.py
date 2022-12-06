@@ -69,6 +69,8 @@ fig.update_layout(
     polar_radialaxis_ticksuffix='',
     polar_angularaxis_rotation=90,
     polar_angularaxis_direction = 'clockwise',
+    polar_radialaxis_angle = 65
+
 
 
 )
