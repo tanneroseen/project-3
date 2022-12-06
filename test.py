@@ -94,7 +94,7 @@ page_css = """
 
 st.markdown(page_css, unsafe_allow_html=True)  #Takes the CSS and applies it to the page
 
-now = dt.now(pytz.timezone('Canada/Mountain')).strftime('%B %d, %Y %X')  #Gets the current date and time
+now = dt.now(pytz.timezone('Canada/Mountain')).strftime('%B %d, %Y %I:%M %p')  #Gets the current date and time
 
 
 #Each write section is a different section of text
